@@ -1,0 +1,101 @@
+#This layout inspired by popular games like Fluxx and Apples to Apples
+TitleBox:
+  x: 75
+  y: 75
+  width: 125
+  height: 975
+
+Title:
+  x: 75
+  y: 1050
+  angle: 4.71238898 # 3 π / 2
+  width: 850
+  height: 125
+  align: right
+  valign: middle
+  font:       ChunkFive Bold,Sans 36
+
+title_middle:
+  x: 225
+  y: 550
+  font: Sans 18
+  width: 525
+  height: 150
+  valign: bottom
+  font:       ChunkFive,Sans 36
+
+middle_rect:
+  x: 225
+  y: 715
+  width: 525
+  height: 25
+
+RuleTop:
+  x: 225
+  y: 200
+  width: 525
+  height: 300
+  font: Caviar Dreams,Sans 32
+
+RuleBottom:
+  x: 225
+  y: 750
+  width: 525
+  height: 300
+  font: Caviar Dreams,Sans 30
+
+type_icon:
+  x: 75
+  y: 75
+  width: 125
+  height: 125
+  align: center
+  valign: middle
+  font: 'Sans 24'
+
+TypeBox:
+  x: 225
+  y: 75
+  width: 525
+  height: 40
+
+Type:
+  x: 225
+  y: 75
+  width: 525
+  height: 40
+  align: center
+  valign: middle
+  font: ChunkFive,Sans 30
+
+copyright:
+  x: 75
+  y: 1025
+  width: 675
+  height: 25
+  font_size: 5
+  align: right
+  valign: bottom
+#aliases for copyright
+copy:
+  extends: copyright
+credit:
+  extends: copyright
+credits:
+  extends: copyright
+
+# The "cut line", without rounded corners
+cut:
+  x: 37.5
+  y: 37.5
+  radius: 16
+  width: 750
+  height: 1050
+
+# The "safe zone" as defined by TheGameCrafter poker cards
+safe:
+  x: 75
+  y: 75
+  width: 675
+  height: 975
+  dash: 3 3
