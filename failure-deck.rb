@@ -9,8 +9,11 @@ Squib::Deck.new(cards: deck['Title'].size, layout: %w(failure-deck.yml)) do
   rect fill_color: :black,   layout: :middle_rect
   rect fill_color: :red,   layout: :TypeBox, stroke_width: 0
 
+  # 'Type' icons
+  svg data: deck['Type'].map { |t| t!=nil ? GameIcons.get(t).recolor(bg_opacity: 0).string : nil}, layout: 'TypeIcon'
+
   # things in white
-  %w(Type).each do |key|
+  %w(TypeText).each do |key|
     text str: deck[key], color: :white, layout: key
   end
 

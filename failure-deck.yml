@@ -7,7 +7,7 @@ TitleBox:
 
 Title:
   x: 75
-  y: 1050
+  y: 1059
   angle: 4.71238898 # 3 π / 2
   width: 850
   height: 125
@@ -44,7 +44,7 @@ RuleBottom:
   height: 300
   font: Caviar Dreams,Sans 30
 
-type_icon:
+TypeIcon:
   x: 75
   y: 75
   width: 125
@@ -59,7 +59,7 @@ TypeBox:
   width: 525
   height: 40
 
-Type:
+TypeText:
   x: 225
   y: 75
   width: 525
