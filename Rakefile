@@ -3,6 +3,5 @@ require 'squib'
 task default: [:deck]
 
 task :deck do
-  #load 'party.rb'
-  load 'failure-deck.rb'
+  load 'chaos-deck.rb'
 end
