@@ -1,8 +1,27 @@
 require 'game_icons'
 
-deck = Squib.csv file: 'data/extra-secret-cthulhu.csv' # no artwork data in our game data!!
+deck = Squib.csv(
+    file: 'data/extra-secret-cthulhu.csv', # no artwork data in our game data!!
+    explode: 'Quantity',
+)
+
+# automatically work out what to showcase (the first time we see a card title)
+seenCard = { }
+showcaseToggle = []
+(0 .. deck.nrows-1).each { |i|
+    row     = deck.row(i)
+    title   = row['Title']
+    if seenCard[title] == nil
+        seenCard[title] = 1
+        showcaseToggle.push(1)
+    else
+        showcaseToggle.push(nil)
+    end
+    deck['AddToShowcase'] = showcaseToggle
+}
 
 Squib::Deck.new(cards: deck['Title'].size, layout: %w(failure-deck.yml)) do
+
   background color: 'white'
 
   rect layout: :TitleBox, fill_color: :deep_sky_blue, stroke_width: 0
@@ -22,7 +41,7 @@ Squib::Deck.new(cards: deck['Title'].size, layout: %w(failure-deck.yml)) do
     text str: deck[key], color: :black, layout: key
   end
 
-  showcaseIndices = deck['Showcase']
+  showcaseIndices = deck['AddToShowcase']
   showcaseIndices = (0 .. showcaseIndices.size).reject {|i| showcaseIndices[i].nil? }
   showcaseIndices.each_slice(5).to_a.each_with_index do |sc,i|
     showcase trim: 32, trim_radius: 32, margin: 100, face: :right,
