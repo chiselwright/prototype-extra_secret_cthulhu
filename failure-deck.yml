@@ -68,6 +68,15 @@ TypeText:
   valign: middle
   font: ChunkFive,Sans 30
 
+CardID:
+  x: 75
+  y: 1025
+  width: 675
+  height: 25
+  font_size: 15
+  align: left
+  valign: bottom
+
 copyright:
   x: 75
   y: 1025

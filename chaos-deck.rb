@@ -47,7 +47,7 @@ Squib::Deck.new(cards: deck['Title'].size, layout: %w(failure-deck.yml)) do
 
   showcaseIndices = deck['AddToShowcase']
   showcaseIndices = (0 .. showcaseIndices.size).reject {|i| showcaseIndices[i].nil? }
-  showcaseIndices.each_slice(5).to_a.each_with_index do |sc,i|
+  showcaseIndices.each_slice(4).to_a.each_with_index do |sc,i|
     showcase trim: 32, trim_radius: 32, margin: 100, face: :right,
             scale: 0.85, offset: 0.95, fill_color: :black,
             reflect_offset: 25, reflect_strength: 0.1, reflect_percent: 0.4,
