@@ -5,12 +5,18 @@ deck = Squib.csv(
     explode: 'Quantity',
 )
 
+# some prerendering prep
 version = "v" + Time.new.strftime("%Y%m%d%H%M%S")
 
-# automatically work out what to showcase (the first time we see a card title)
+CardIDs = []
 seenCard = { }
 showcaseToggle = []
+
 (0 .. deck.nrows-1).each { |i|
+    # add card id
+    CardIDs.push("Chaos-%03d" % (i+1) )
+
+    # automatically work out what to showcase (the first time we see a card title)
     row     = deck.row(i)
     title   = row['Title']
     if seenCard[title] == nil
@@ -19,8 +25,9 @@ showcaseToggle = []
     else
         showcaseToggle.push(nil)
     end
-    deck['AddToShowcase'] = showcaseToggle
 }
+deck['AddToShowcase']   = showcaseToggle
+deck['CardID']          = CardIDs
 
 Squib::Deck.new(cards: deck['Title'].size, layout: %w(failure-deck.yml)) do
 
@@ -43,6 +50,12 @@ Squib::Deck.new(cards: deck['Title'].size, layout: %w(failure-deck.yml)) do
     text str: deck[key], color: :black, layout: key
   end
 
+  # things in gray
+  %w(CardID).each do |key|
+    text str: deck[key], color: :gray, layout: key
+  end
+
+  # this is the same on all cards
   text str: version, color: :black, layout: :copyright
 
   showcaseIndices = deck['AddToShowcase']

@@ -69,7 +69,7 @@ TypeText:
   font: ChunkFive,Sans 30
 
 CardID:
-  x: 75
+  x: 100
   y: 1025
   width: 675
   height: 25
