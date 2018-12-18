@@ -8,9 +8,11 @@ deck = Squib.csv(
 # some prerendering prep
 version = "v" + Time.new.strftime("%Y%m%d%H%M%S")
 
+TitleBoxColorBG = []
+TitleBoxColorFG = []
 CardIDs = []
-seenCard = { }
-showcaseToggle = []
+SeenCard = { }
+AddToShowcase = []
 
 (0 .. deck.nrows-1).each { |i|
     # add card id
@@ -19,40 +21,49 @@ showcaseToggle = []
     # automatically work out what to showcase (the first time we see a card title)
     row     = deck.row(i)
     title   = row['Title']
-    if seenCard[title] == nil
-        seenCard[title] = 1
-        showcaseToggle.push(1)
+    if SeenCard[title] == nil
+        SeenCard[title] = 1
+        AddToShowcase.push(1)
     else
-        showcaseToggle.push(nil)
+        AddToShowcase.push(nil)
+    end
+
+    # make "play immediately" look different
+    if (deck.row(i)['TypeText'] == 'PLAY IMMEDIATELY')
+        TitleBoxColorFG.push(:white)
+        TitleBoxColorBG.push(:red)
+    else
+        TitleBoxColorFG.push(:black)
+        TitleBoxColorBG.push(:deep_sky_blue)
     end
 }
-deck['AddToShowcase']   = showcaseToggle
-deck['CardID']          = CardIDs
+deck['AddToShowcase']       = AddToShowcase
+deck['CardID']              = CardIDs
+deck['TitleBoxColorBG']     = TitleBoxColorBG
+deck['TitleBoxColorFG']     = TitleBoxColorFG
 
 Squib::Deck.new(cards: deck['Title'].size, layout: %w(chaos-deck-layout.yml)) do
 
   background color: 'white'
 
-  rect layout: :TitleBox, fill_color: :deep_sky_blue, stroke_width: 0
+  # use the determined colour from the autu-prep loop above
+  rect layout: :TitleBox, fill_color: deck['TitleBoxColorBG'], stroke_width: 0
+  rect layout: :TypeBox,  fill_color: deck['TitleBoxColorBG'], stroke_width: 0
+
+  # this one's always filled with black
   rect fill_color: :black,   layout: :middle_rect
-  rect fill_color: :red,   layout: :TypeBox, stroke_width: 0
 
   # 'Type' icons
   svg data: deck['Type'].map { |t| t!=nil ? GameIcons.get(t).recolor(bg_opacity: 0).string : nil}, layout: 'TypeIcon'
 
   # things in white
   %w(TypeText).each do |key|
-    text str: deck[key], color: :white, layout: key
+    text str: deck[key], color: deck['TitleBoxColorFG'], layout: key
   end
 
   # things in black
-  %w(Title RuleTop RuleBottom).each do |key|
+  %w(Title RuleTop RuleBottom CardID).each do |key|
     text str: deck[key], color: :black, layout: key
-  end
-
-  # things in gray
-  %w(CardID).each do |key|
-    text str: deck[key], color: :gray, layout: key
   end
 
   # this is the same on all cards
