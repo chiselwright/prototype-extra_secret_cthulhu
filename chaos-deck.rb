@@ -29,7 +29,7 @@ showcaseToggle = []
 deck['AddToShowcase']   = showcaseToggle
 deck['CardID']          = CardIDs
 
-Squib::Deck.new(cards: deck['Title'].size, layout: %w(failure-deck.yml)) do
+Squib::Deck.new(cards: deck['Title'].size, layout: %w(chaos-deck-layout.yml)) do
 
   background color: 'white'
 
