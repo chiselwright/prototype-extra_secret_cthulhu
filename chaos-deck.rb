@@ -5,6 +5,8 @@ deck = Squib.csv(
     explode: 'Quantity',
 )
 
+version = "v" + Time.new.strftime("%Y%m%d%H%M%S")
+
 # automatically work out what to showcase (the first time we see a card title)
 seenCard = { }
 showcaseToggle = []
@@ -40,6 +42,8 @@ Squib::Deck.new(cards: deck['Title'].size, layout: %w(failure-deck.yml)) do
   %w(Title RuleTop RuleBottom).each do |key|
     text str: deck[key], color: :black, layout: key
   end
+
+  text str: version, color: :black, layout: :copyright
 
   showcaseIndices = deck['AddToShowcase']
   showcaseIndices = (0 .. showcaseIndices.size).reject {|i| showcaseIndices[i].nil? }

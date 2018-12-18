@@ -73,7 +73,7 @@ copyright:
   y: 1025
   width: 675
   height: 25
-  font_size: 5
+  font_size: 15
   align: right
   valign: bottom
 #aliases for copyright
