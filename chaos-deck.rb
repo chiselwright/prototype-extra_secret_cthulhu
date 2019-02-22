@@ -83,4 +83,6 @@ Squib::Deck.new(cards: deck['Title'].size, layout: %w(chaos-deck-layout.yml)) do
   save_pdf file: 'failure-deck-a4-landscape.pdf',
             height: "8.27in", width: "11.69in", 
             margin: 75, gap: 5, trim: 37
+
+  save_png
 end
